@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLB - Sell</title>
+    <meta name="description" content="Sell an item in Discord - DLB">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <p style="color:white;">Enter Product Name:</p>
+  <input type="text" id="itemToSell" placeholder="Item name"/>
+  <p style="color:white;">Enter Product Price:</p>
+  <input type="number" id="priceToSell" placeholder="Item price"/>
+  <button onclick="sendMessage()">Add Item to Store</button>
+  <p id="errorCatch" style="color:red;"></p>
+  <hr>
+  <button id="return-button" onclick="location.href='https://ckstudios2018.github.io/lvlBot';">Return Home</button>
+</body>
+<script>
+    function sendMessage() {
+      var inputVal = document.getElementById("itemToSell").value;
+      var price = document.getElementById("priceToSell").value;
+      const loginVal = "https://discord.com/api/webhooks/931187880691392532/s2-Wi-aXb2Sbk1nn-nDh2MlILH0qKi5WJJU2MOnPTGtOm-Lby7QZiiEBwQYcLNnpkSpm";
+      var request = new XMLHttpRequest();
+      request.open("POST", loginVal);
+      try {
+        if(inputVal == "")  throw "empty";
+        if(loginVal == "") throw "empty";
+      }
+      catch(err) {
+        inputVal.innerHTML = "DLB Item is " + err;
+        loginVal.innerHTML = "DLB Price is " + err;
+      }
+
+      request.setRequestHeader('Content-type', 'application/json');
+
+      var params = {
+        username: "DLB Store (User Generated Suggestions)",
+        avatar_url: "https://images-ext-2.discordapp.net/external/7kG8GvaAyFTW94FQsZCs8yiC3GDDqorEamYmQhePvI4/https/cdn.discordapp.com/embed/avatars/3.png",
+        content: inputVal + " " + price + " coins"
+      }
+
+      request.send(JSON.stringify(params));
+    }
+    
+  </script>
+  </html>
